@@ -9,3 +9,10 @@ export const fetchGifs = (offset) =>
       `https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&offset=${offset}`
     )
     .then((response) => mapGifList(response.data));
+
+export const searchGifs = (offset, searchQuery) =>
+  axios
+    .get(
+      `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&offset=${offset}&q=${searchQuery}`
+    )
+    .then((response) => mapGifList(response.data));
