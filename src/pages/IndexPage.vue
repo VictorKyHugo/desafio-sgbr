@@ -1,11 +1,17 @@
 <template>
-  <q-page class="flex-center flex"></q-page>
+  <q-layout>
+    <q-header elevated>
+      <q-toolbar class="bg-amber-700">
+        <q-toolbar-title> Orchestra Gifs </q-toolbar-title>
+      </q-toolbar>
+    </q-header>
+
+    <q-page-container>
+      <GifListComponent />
+    </q-page-container>
+  </q-layout>
 </template>
 
-<script>
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "IndexPage",
-});
+<script setup>
+import GifListComponent from "src/components/GifListComponent.vue";
 </script>
