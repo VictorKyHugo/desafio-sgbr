@@ -1,8 +1,8 @@
 {
   "name": "desafio-sgbr",
   "version": "0.0.1",
-  "description": "Find gifs about orchestra",
-  "productName": "Orchestra Gifs",
+  "description": "Find gifs about everything",
+  "productName": "Giphy API",
   "author": "Victorkyhugo",
   "private": true,
   "scripts": {
