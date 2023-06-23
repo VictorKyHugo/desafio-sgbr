@@ -6,7 +6,7 @@
     :disable="isGifsScrollDisabled"
   >
     <div
-      v-for="(gif, index) in gifs"
+      v-for="(gif, index) in gifsPreview"
       :key="index"
       class="m-12 justify-self-center"
     >
@@ -41,5 +41,5 @@ import GifModalComponent from "./GifModalComponent.vue";
 // Store
 const store = useGifsStore();
 const { onLoad, toggleModal } = store;
-const { gifs, isGifsScrollDisabled, isModalOpen } = storeToRefs(store);
+const { gifsPreview, isGifsScrollDisabled, isModalOpen } = storeToRefs(store);
 </script>

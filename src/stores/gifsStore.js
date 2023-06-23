@@ -4,7 +4,8 @@ import { ref, computed } from "vue";
 import * as GifsListService from "../services/gifs.service";
 
 export const useGifsStore = defineStore("gifs", () => {
-  const gifs = ref([]);
+  const gifsPreview = ref([]);
+  const gifsFullsized = ref([]);
   const offsetIndex = ref(0);
 
   const onLoad = async (index, done) => {
@@ -32,14 +33,19 @@ export const useGifsStore = defineStore("gifs", () => {
     return await GifsListService.fetchGifs(offset)
       .then((data) => {
         //check if there's data
-        if (data.gifs.length) {
-          gifs.value = [...gifs.value, ...data.gifs];
+        if (data.gifs_preview.length) {
+          gifsPreview.value = [...gifsPreview.value, ...data.gifs_preview];
+          gifsFullsized.value = [
+            ...gifsFullsized.value,
+            ...data.gifs_fullsized,
+          ];
         } else {
           isGifsScrollDisabled.value = true;
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
+        isGifsScrollDisabled.value = true;
       });
   };
 
@@ -53,21 +59,27 @@ export const useGifsStore = defineStore("gifs", () => {
     return await GifsListService.searchGifs(offset, string)
       .then((data) => {
         //check if there's data
-        if (data.gifs.length) {
-          gifs.value = [...gifs.value, ...data.gifs];
+        if (data.gifs_preview.length) {
+          gifsPreview.value = [...gifsPreview.value, ...data.gifs_preview];
+          gifsFullsized.value = [
+            ...gifsFullsized.value,
+            ...data.gifs_fullsized,
+          ];
         } else {
           isGifsScrollDisabled.value = true;
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
+        isGifsScrollDisabled.value = true;
       });
   };
 
   const resetGifsList = () => {
     offsetIndex.value = 1;
     isGifsScrollDisabled.value = false;
-    gifs.value = [];
+    gifsPreview.value = [];
+    gifsFullsized.value = [];
   };
 
   const searchGifs = (string) => {
@@ -88,11 +100,12 @@ export const useGifsStore = defineStore("gifs", () => {
   };
 
   const getSelectedGif = computed(() => {
-    return gifs.value[selectedGifIndex.value];
+    return gifsFullsized.value[selectedGifIndex.value];
   });
 
   return {
-    gifs,
+    gifsPreview,
+    gifsFullsized,
     onLoad,
     fetchGifsListData,
     searchGifsListData,

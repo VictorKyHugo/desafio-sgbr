@@ -8,14 +8,20 @@ const apiKey = import.meta.env.VITE_GIPHY_API_KEY;
 const gifsMock = [
   {
     images: {
-      downsized_medium: {
+      fixed_height_small: {
+        url: "https://giphy.com/gifs/nope-nah-fam-WTjnWYENpLxS8JQ5rz",
+      },
+      original: {
         url: "https://giphy.com/gifs/nope-nah-fam-WTjnWYENpLxS8JQ5rz",
       },
     },
   },
   {
     images: {
-      downsized_medium: {
+      fixed_height_small: {
+        url: "https://giphy.com/gifs/cat-turtle-eY2Q6hxp1ZeFi",
+      },
+      original: {
         url: "https://giphy.com/gifs/cat-turtle-eY2Q6hxp1ZeFi",
       },
     },
@@ -45,7 +51,11 @@ describe("Gifs Service", () => {
 
       expect(gifs).toMatchInlineSnapshot(`
         {
-          "gifs": [
+          "gifs_fullsized": [
+            "https://giphy.com/gifs/nope-nah-fam-WTjnWYENpLxS8JQ5rz",
+            "https://giphy.com/gifs/cat-turtle-eY2Q6hxp1ZeFi",
+          ],
+          "gifs_preview": [
             "https://giphy.com/gifs/nope-nah-fam-WTjnWYENpLxS8JQ5rz",
             "https://giphy.com/gifs/cat-turtle-eY2Q6hxp1ZeFi",
           ],
@@ -70,7 +80,11 @@ describe("Gifs Service", () => {
 
       expect(gifs).toMatchInlineSnapshot(`
         {
-          "gifs": [
+          "gifs_fullsized": [
+            "https://giphy.com/gifs/nope-nah-fam-WTjnWYENpLxS8JQ5rz",
+            "https://giphy.com/gifs/cat-turtle-eY2Q6hxp1ZeFi",
+          ],
+          "gifs_preview": [
             "https://giphy.com/gifs/nope-nah-fam-WTjnWYENpLxS8JQ5rz",
             "https://giphy.com/gifs/cat-turtle-eY2Q6hxp1ZeFi",
           ],

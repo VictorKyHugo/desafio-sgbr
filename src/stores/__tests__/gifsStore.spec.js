@@ -7,14 +7,20 @@ import * as GifsListService from "../../services/gifs.service";
 const gifsMock = [
   {
     images: {
-      downsized_medium: {
+      fixed_height_small: {
+        url: "https://giphy.com/gifs/nope-nah-fam-WTjnWYENpLxS8JQ5rz",
+      },
+      original: {
         url: "https://giphy.com/gifs/nope-nah-fam-WTjnWYENpLxS8JQ5rz",
       },
     },
   },
   {
     images: {
-      downsized_medium: {
+      fixed_height_small: {
+        url: "https://giphy.com/gifs/cat-turtle-eY2Q6hxp1ZeFi",
+      },
+      original: {
         url: "https://giphy.com/gifs/cat-turtle-eY2Q6hxp1ZeFi",
       },
     },
@@ -82,14 +88,16 @@ describe("Gifs Store", () => {
 
     store.offsetIndex = 22;
     store.isGifsScrollDisabled = true;
-    store.gifs = gifsMock;
+    store.gifsPreview = gifsMock;
+    store.gifsFullsized = gifsMock;
 
     const resetGifsSpy = vi
       .spyOn(store, "resetGifsList")
       .mockImplementation(() => {
         store.offsetIndex = 1;
         store.isGifsScrollDisabled = false;
-        store.gifs = [];
+        store.gifsPreview = [];
+        store.gifsFullsized = [];
       });
 
     store.resetGifsList();
@@ -97,7 +105,8 @@ describe("Gifs Store", () => {
     expect(resetGifsSpy).toHaveBeenCalled();
     expect(store.offsetIndex).toBe(1);
     expect(store.isGifsScrollDisabled).toBe(false);
-    expect(store.gifs).toStrictEqual([]);
+    expect(store.gifsPreview).toStrictEqual([]);
+    expect(store.gifsFullsized).toStrictEqual([]);
   });
 
   it("should call searchGifs function to search gifs", () => {
@@ -139,14 +148,17 @@ describe("Gifs Store", () => {
   it("should get selectedGif by index", () => {
     const store = useGifsStore();
 
-    store.gifs = gifsMock;
+    store.gifsFullsized = gifsMock;
     store.selectedGifIndex = 1;
-    const getSelectedGifSpy = store.gifs[store.selectedGifIndex];
+    const getSelectedGifSpy = store.gifsFullsized[store.selectedGifIndex];
 
     expect(getSelectedGifSpy).toMatchInlineSnapshot(`
       {
         "images": {
-          "downsized_medium": {
+          "fixed_height_small": {
+            "url": "https://giphy.com/gifs/cat-turtle-eY2Q6hxp1ZeFi",
+          },
+          "original": {
             "url": "https://giphy.com/gifs/cat-turtle-eY2Q6hxp1ZeFi",
           },
         },
