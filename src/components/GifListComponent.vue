@@ -1,9 +1,9 @@
 <template>
-  <GifModalComponent v-if="isModalOpen" />
+  <GifModalComponent data-test="gif-modal-component" v-if="isModalOpen" />
   <q-infinite-scroll
     class="grid grid-cols-2 items-center justify-center sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
     @load="onLoad"
-    :disable="disableGifsScroll"
+    :disable="isGifsScrollDisabled"
   >
     <div
       v-for="(gif, index) in gifs"
@@ -24,7 +24,11 @@
     </template>
   </q-infinite-scroll>
 
-  <div v-if="disableGifsScroll" class="mb-10 mt-2 text-center text-xl">
+  <div
+    v-if="isGifsScrollDisabled"
+    data-test="no-gifs-message"
+    class="mb-10 mt-2 text-center text-xl"
+  >
     Acabou os gifs, tente fazer outra pesquisa 😊
   </div>
 </template>
@@ -37,5 +41,5 @@ import GifModalComponent from "./GifModalComponent.vue";
 // Store
 const store = useGifsStore();
 const { onLoad, toggleModal } = store;
-const { gifs, disableGifsScroll, isModalOpen } = storeToRefs(store);
+const { gifs, isGifsScrollDisabled, isModalOpen } = storeToRefs(store);
 </script>

@@ -1,8 +1,14 @@
 <template>
   <q-form @submit.prevent="onSearch" class="flex justify-center">
-    <q-input v-model="inputText" class="mt-2 w-4/6" label="Pesquisar Gifs">
+    <q-input
+      data-test="search-input"
+      v-model="inputText"
+      class="mt-2 w-4/6"
+      label="Pesquisar Gifs"
+    >
       <template v-slot:append>
         <q-icon
+          data-test="clear-input-icon"
           v-if="inputText"
           name="close"
           @click="resetInputText"

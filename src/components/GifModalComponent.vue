@@ -2,6 +2,7 @@
   <div>
     <div
       @click="toggleModal"
+      data-test="modal-background"
       class="absolute bottom-0 top-0 z-20 min-h-full w-20 min-w-full bg-black opacity-60"
     ></div>
     <q-img
@@ -10,6 +11,7 @@
     />
     <q-icon
       name="close"
+      data-test="modal-close"
       size="3rem"
       @click="toggleModal"
       class="fixed right-6 top-20 z-40 cursor-pointer"
@@ -25,8 +27,4 @@ import { useGifsStore } from "stores/gifsStore";
 const store = useGifsStore();
 const { toggleModal } = store;
 const { getSelectedGif } = storeToRefs(store);
-
-const props = defineProps({
-  index: String,
-});
 </script>

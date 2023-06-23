@@ -35,18 +35,18 @@ export const useGifsStore = defineStore("gifs", () => {
         if (data.gifs.length) {
           gifs.value = [...gifs.value, ...data.gifs];
         } else {
-          disableGifsScroll.value = true;
+          isGifsScrollDisabled.value = true;
         }
       })
       .catch((err) => {
-        throw new Error(err);
+        console.log(err);
       });
   };
 
   //Gif Search
 
   const isUserSearching = ref(false);
-  const disableGifsScroll = ref(false);
+  const isGifsScrollDisabled = ref(false);
   const searchQuery = ref("");
 
   const searchGifsListData = async (offset, string) => {
@@ -56,17 +56,17 @@ export const useGifsStore = defineStore("gifs", () => {
         if (data.gifs.length) {
           gifs.value = [...gifs.value, ...data.gifs];
         } else {
-          disableGifsScroll.value = true;
+          isGifsScrollDisabled.value = true;
         }
       })
       .catch((err) => {
-        throw new Error(err);
+        console.log(err);
       });
   };
 
   const resetGifsList = () => {
     offsetIndex.value = 1;
-    disableGifsScroll.value = false;
+    isGifsScrollDisabled.value = false;
     gifs.value = [];
   };
 
@@ -94,9 +94,11 @@ export const useGifsStore = defineStore("gifs", () => {
   return {
     gifs,
     onLoad,
+    fetchGifsListData,
+    searchGifsListData,
     resetGifsList,
     searchGifs,
-    disableGifsScroll,
+    isGifsScrollDisabled,
     isModalOpen,
     toggleModal,
     getSelectedGif,
