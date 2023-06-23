@@ -1,41 +1,25 @@
-# Orchestra Gifs (desafio-sgbr)
+# Desafio-SGBr
 
-Find gifs about orchestra
+Crie uma tela consumindo os dados da api de https://developers.giphy.com/ com scroll infinito de gifs, uma opção de busca e uma visualização ampliada do gif selecionado.
 
-## Install the dependencies
+## Instale as dependências
 ```bash
-yarn
-# or
 npm install
 ```
+### Crie um arquivo .env com a key da api do giphy
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
-quasar dev
+VITE_GIPHY_API_KEY='colocar key da api aqui'
+```
+
+### Iniciar aplicação
+```bash
+npm run dev
+```
+
+### Executar testes
+```bash
+npm run test:unit
 ```
 
 
-### Lint the files
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-
-### Format the files
-```bash
-yarn format
-# or
-npm run format
-```
-
-
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
