@@ -1,5 +1,5 @@
 export const mapGifList = (gifs) => {
   return {
-    gifs_preview: gifs.data.map((gif) => gif.images.downsized_medium.url),
+    gifs: gifs.data.map((gif) => gif.images.downsized_medium.url),
   };
 };

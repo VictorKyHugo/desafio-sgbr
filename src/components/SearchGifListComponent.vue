@@ -1,14 +1,14 @@
 <template>
-  <q-form @submit.prevent="(e) => onSearch(e)" class="flex justify-center">
-    <q-input v-model="text" class="w-4/6" label="Pesquisar Gifs">
+  <q-form @submit.prevent="onSearch" class="flex justify-center">
+    <q-input v-model="inputText" class="mt-2 w-4/6" label="Pesquisar Gifs">
       <template v-slot:append>
         <q-icon
-          v-if="text !== ''"
+          v-if="inputText"
           name="close"
-          @click="text = ''"
+          @click="resetInputText"
           class="cursor-pointer"
         />
-        <q-icon name="search" class="cursor-pointer" @click="searchGifs" />
+        <q-icon name="search" @click="onSearch" class="cursor-pointer" />
       </template>
     </q-input>
   </q-form>
@@ -18,14 +18,16 @@
 import { useGifsStore } from "stores/gifsStore";
 import { ref } from "vue";
 
-const text = ref("");
+const inputText = ref("");
 
-const onSearch = (e) => {
-  const stringQuery = e.target[0].value;
+const resetInputText = () => {
+  inputText.value = "";
+};
 
+const onSearch = () => {
   resetGifsList();
-  searchGifs(stringQuery);
-  text.value = "";
+  searchGifs(inputText.value);
+  resetInputText();
 };
 
 // Store

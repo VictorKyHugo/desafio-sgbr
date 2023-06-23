@@ -6,39 +6,6 @@ import * as GifsListService from "../services/gifs.service";
 export const useGifsStore = defineStore("gifs", () => {
   const gifs = ref([]);
   const offsetIndex = ref(0);
-  const isUserSearching = ref(false);
-  const disableGifsScroll = ref(false);
-  const searchQuery = ref("");
-
-  const fetchGifsListData = async (offset) => {
-    return await GifsListService.fetchGifs(offset)
-      .then((data) => {
-        //check if there's data
-        if (data.gifs_preview.length) {
-          gifs.value = [...gifs.value, ...data.gifs_preview];
-        } else {
-          disableGifsScroll.value = true;
-        }
-      })
-      .catch((err) => {
-        throw new Error(err);
-      });
-  };
-
-  const searchGifsListData = async (offset, string) => {
-    return await GifsListService.searchGifs(offset, string)
-      .then((data) => {
-        //check if there's data
-        if (data.gifs_preview.length) {
-          gifs.value = [...gifs.value, ...data.gifs_preview];
-        } else {
-          disableGifsScroll.value = true;
-        }
-      })
-      .catch((err) => {
-        throw new Error(err);
-      });
-  };
 
   const onLoad = async (index, done) => {
     const getOffset = computed(() => {
@@ -59,6 +26,44 @@ export const useGifsStore = defineStore("gifs", () => {
     done();
   };
 
+  // Gif List without search
+
+  const fetchGifsListData = async (offset) => {
+    return await GifsListService.fetchGifs(offset)
+      .then((data) => {
+        //check if there's data
+        if (data.gifs.length) {
+          gifs.value = [...gifs.value, ...data.gifs];
+        } else {
+          disableGifsScroll.value = true;
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  };
+
+  //Gif Search
+
+  const isUserSearching = ref(false);
+  const disableGifsScroll = ref(false);
+  const searchQuery = ref("");
+
+  const searchGifsListData = async (offset, string) => {
+    return await GifsListService.searchGifs(offset, string)
+      .then((data) => {
+        //check if there's data
+        if (data.gifs.length) {
+          gifs.value = [...gifs.value, ...data.gifs];
+        } else {
+          disableGifsScroll.value = true;
+        }
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  };
+
   const resetGifsList = () => {
     offsetIndex.value = 1;
     disableGifsScroll.value = false;
@@ -72,11 +77,28 @@ export const useGifsStore = defineStore("gifs", () => {
     searchGifsListData(offsetIndex.value, searchQuery.value);
   };
 
+  // Modal
+
+  const isModalOpen = ref(false);
+  const selectedGifIndex = ref("");
+
+  const toggleModal = (index) => {
+    isModalOpen.value = !isModalOpen.value;
+    selectedGifIndex.value = index;
+  };
+
+  const getSelectedGif = computed(() => {
+    return gifs.value[selectedGifIndex.value];
+  });
+
   return {
+    gifs,
     onLoad,
     resetGifsList,
     searchGifs,
-    gifs,
     disableGifsScroll,
+    isModalOpen,
+    toggleModal,
+    getSelectedGif,
   };
 });
