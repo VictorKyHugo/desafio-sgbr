@@ -1,7 +1,7 @@
 <template>
   <q-layout>
     <q-header elevated>
-      <q-toolbar class="bg-amber-600">
+      <q-toolbar class="bg-orange-400">
         <q-toolbar-title> Giphy </q-toolbar-title>
       </q-toolbar>
     </q-header>
