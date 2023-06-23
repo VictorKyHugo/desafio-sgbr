@@ -27,7 +27,7 @@
   <div
     v-if="isGifsScrollDisabled"
     data-test="no-gifs-message"
-    class="mb-10 mt-2 text-center text-xl"
+    class="mt-2 pb-10 text-center text-xl"
   >
     Acabou os gifs, tente fazer outra pesquisa 😊
   </div>
